@@ -19,15 +19,15 @@ show functions like '%json_masking';
 Create or replace masking policy semi_data_masking 
 as (val variant) returns variant ->
     case when true 
-        then array_json_masking(val)
-    else array_json_masking(val)
+        then json_masking(val)
+    else json_masking(val)
 End;
 
 show masking policies like '%masking';
 
 //apply masking policy
 alter table raw_file modify column "job" 
-set masking policy Semi_Data_Masking;
+set masking policy semi_data_masking;
 
 select * from raw_file;
 
